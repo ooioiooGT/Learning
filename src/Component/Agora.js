@@ -4,9 +4,9 @@ import AgoraUIKit from 'agora-react-uikit';
 const Agora = () => {
   const [videoCall, setVideoCall] = useState(true);
   const rtcProps = {
-    appId: '<Agora App ID>',
+    appId: '5682a290fd384242a78369cd7a88ebee',
     channel: 'test', // your agora channel
-    token: '<Your channel Token>' // use null or skip if using app in testing mode
+    token: '007eJxTYLi19p+c2MQ0FtUz+zOyb1UVGQcsXXpUx1DbabGsZtcCzUgFBlMzC6NEI0uDtBRjCxMjE6NEcwtjM8vkFPNEC4vUpNTU4CCT1IZARobQV29ZGRkgEMRnYShJLS5hYAAAvyUdrg==' // use null or skip if using app in testing mode
   };
   const callbacks = {
     EndCall: () => setVideoCall(false),
