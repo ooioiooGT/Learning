@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import login from './Login.module.css';
 import { SignIn } from './firbase'; // Corrected the typo in 'firebase'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -20,6 +21,7 @@ export default function Login() {
     try {
       console.log(email, password); // Log the email and password
       await SignIn(email, password); // Call the SignIn function
+      navigate("/Profile");
     } catch (error) {
       console.error("Sign-in failed:", error.message);
     }

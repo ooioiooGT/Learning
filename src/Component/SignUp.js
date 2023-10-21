@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import signup from './SignUp.module.css';
 import { Signup } from './firbase'; // Rename import to avoid conflicts with the component
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -18,6 +19,7 @@ export default function SignUp() {
     try{
         console.log(email, password); // Log the email and password
         Signup(email, password); // Call the SignUp function
+        navigate("/Profile");
     }catch (error){
         console.error("Sign-up failed:", error.message);
     }};

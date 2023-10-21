@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
 import {getFirestore, addDoc, collection, getDoc} from 'firebase/firestore';
-import { useNavigate } from "react-router-dom";
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,12 +41,11 @@ export const SignIn = async (email, password) => {
   
 
   export const Signup = async ( email, password) => {
-    const navigate = useNavigate();
+    
     try {
         const userCredential = await createUserWithEmailAndPassword( auth, email, password);
         // Successfully signed in, userCredential contains user information.
         console.log("Successfully signed in:", userCredential.user.email);
-        navigate("/Profile");
       } catch (error) {
         // Handle sign-in errors
         console.error("Sign-in failed:", error.message);
