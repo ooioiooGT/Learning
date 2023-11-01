@@ -18,13 +18,12 @@ export default function Login() {
   
 
   const handleLogin = async () => {
-    try {
       console.log(email, password); // Log the email and password
-      await SignIn(email, password); // Call the SignIn function
-      navigate("/Profile");
-    } catch (error) {
-      console.error("Sign-in failed:", error.message);
-    }
+      const respond = await SignIn(email, password); // Call the SignIn function
+      if (respond){
+        navigate("/profile")
+      }else {
+      }
   };
   
 
