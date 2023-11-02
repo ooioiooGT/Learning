@@ -16,13 +16,15 @@ export default function SignUp() {
   };
 
   const handleSignUp = async () => {
-    try{
         console.log(email, password); // Log the email and password
-        Signup(email, password); // Call the SignUp function
-        navigate("/Profile");
-    }catch (error){
-        console.error("Sign-up failed:", error.message);
-    }};
+        const respond = await Signup(email, password); // Call the SignUp function
+        if (respond){
+          navigate("/profile")
+        }else{
+        }
+
+        
+    };
 
   return (
     <div className={signup.signup}>
