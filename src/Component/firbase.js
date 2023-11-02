@@ -53,7 +53,7 @@ export const SignIn = async (email, password) => {
       // Handle sign-in errors
       console.error("Sign-in failed:", error.message);
       alert("Invalid username or password");
-      return false
+      return false;
     }
   };
   
@@ -64,9 +64,12 @@ export const SignIn = async (email, password) => {
         const userCredential = await createUserWithEmailAndPassword( auth, email, password);
         // Successfully signed in, userCredential contains user information.
         console.log("Successfully signed in:", userCredential.user.email);
+        return true;
       } catch (error) {
         // Handle sign-in errors
         console.error("Sign-in failed:", error.message);
+        return false;
+        
       }
   }
 
