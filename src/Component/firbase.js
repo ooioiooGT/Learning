@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , signOut} from "firebase/auth"
 import {getFirestore, addDoc, collection, getDoc} from 'firebase/firestore';
 
 
@@ -24,14 +24,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app)
-
 export const googleSignIn = async () =>{
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     console.log("Successfully signed in with Google:", user.displayName);
-    localStorage.setItem();
     return true;
   } catch (error) {
     console.error("Google Sign-in failed:", error.message);
@@ -47,7 +45,7 @@ export const SignIn = async (email, password) => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       // Successfully signed in, userCredential contains user information.
       console.log("Successfully signed in:", userCredential.user.email);
-      localStorage.setItem();
+      localStorage.setItem("user", userCredential.user.email)
       return true
     } catch (error) {
       // Handle sign-in errors
@@ -98,3 +96,7 @@ export const SignIn = async (email, password) => {
         console.error("faild to read data",error.message)
     }
   }
+export const SignOut = async () =>{
+  signOut(auth);
+  localStorage.clear();
+} 

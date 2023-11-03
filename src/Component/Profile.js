@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import profile from './Profile.module.css';
-import { SaveData } from './firbase';
+import { SignOut, SaveData } from './firbase';
+import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
   const [firstName, setFirstName] = useState('');
@@ -10,7 +11,13 @@ export default function Profile() {
   const [firstLanguage, setFirstLanguage] = useState('');
   const [secondLanguage, setSecondLanguage] = useState('');
   const [email, setEmail] = useState('');
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userLoggedIn = localStorage.getItem('user');
+    if (!userLoggedIn) {
+      navigate('/'); // Redirect to the login page if not logged in
+    }
+  }, [navigate]);
   const genderOptions = ["Male", "Female", "Other"];
 
 
@@ -53,10 +60,17 @@ export default function Profile() {
     console.log('Email', email);
     SaveData(firstName,lastName,age,gender,email,firstLanguage,secondLanguage);
   };
-
+  const HandleSignOut = async() => {
+    SignOut();
+    navigate("/");
+    
+  }
   return (
     <div className={profile.profile}>
       <h2>Profile</h2>
+      <button type='button' onClick={HandleSignOut}>
+        Sign Out 
+      </button>
       <form>
         <div>
           <label>First Name:</label>
