@@ -5,6 +5,7 @@ import SignUp from './Component/SignUp';
 import Profile from './Component/Profile';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Agora from './Component/Agora';
+import Homepage from './Component/Homepage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/SignUp' element={<SignUp />} />
             <Route path="/Profile" element={<Profile  />} />
             <Route path='/Agora' element={<Agora />} />
+            <Route path='/Homepage' element={<Homepage />} /> 
             
           </Routes>
         </div>

@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup , signOut} from "firebase/auth"
 import {getFirestore, addDoc, collection, getDoc} from 'firebase/firestore';
+import Cookise from 'js-cookie';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,12 +25,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app)
+
+
 export const googleSignIn = async () =>{
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     console.log("Successfully signed in with Google:", user.displayName);
+    Cookise.set("user", JSON.stringify(user.displayName));
     return true;
   } catch (error) {
     console.error("Google Sign-in failed:", error.message);
@@ -62,6 +66,7 @@ export const SignIn = async (email, password) => {
         const userCredential = await createUserWithEmailAndPassword( auth, email, password);
         // Successfully signed in, userCredential contains user information.
         console.log("Successfully signed in:", userCredential.user.email);
+        localStorage.setItem("user", userCredential.user.email )
         return true;
       } catch (error) {
         // Handle sign-in errors
@@ -98,5 +103,5 @@ export const SignIn = async (email, password) => {
   }
 export const SignOut = async () =>{
   signOut(auth);
-  localStorage.clear();
+  Cookise.remove('user');
 } 

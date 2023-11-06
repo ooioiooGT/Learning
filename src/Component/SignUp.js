@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import signup from './SignUp.module.css';
-import { Signup } from './firbase'; // Rename import to avoid conflicts with the component
+import { Signup, googleSignIn } from './firbase'; // Rename import to avoid conflicts with the component
 import { Link , useNavigate} from 'react-router-dom';
+import google from '../Assert/google.png';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -25,7 +26,14 @@ export default function SignUp() {
 
         
     };
+const handlegoogle = async () => {
+  const respond = await googleSignIn();
+  if (respond){
+    navigate("/profile");
+  }else{
 
+  }
+}
   return (
     <div className={signup.signup}>
       <h2>Signup</h2>
@@ -52,6 +60,9 @@ export default function SignUp() {
           Signup
         </button>
         <Link to="/">Signin</Link>
+        <div onClick={handlegoogle}> 
+          <img src={google} alt='' /> 
+        </div>
       </form>
     </div>
   );

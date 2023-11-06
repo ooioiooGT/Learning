@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import login from './Login.module.css';
 import { SignIn, googleSignIn } from './firbase'; // Corrected the typo in 'firebase'
 import { Link, useNavigate } from 'react-router-dom';
+import google from '../Assert/google.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,14 +22,14 @@ export default function Login() {
       console.log(email, password); // Log the email and password
       const respond = await SignIn(email, password); // Call the SignIn function
       if (respond){
-        navigate("/profile");
+        navigate("/Homepage");
       }else {
       }
   };
   const handlegoogle = async () => {
     const respond = await googleSignIn();
     if (respond){
-      navigate("/profile");
+      navigate("/Homepage");
     }else{
 
     }
@@ -62,7 +63,7 @@ export default function Login() {
         </button>
         <Link to="/SignUp">Sign Up</Link>
         <div onClick={handlegoogle}> 
-          google sign in 
+          <img src={google} alt='' /> 
         </div>
 
       </form>

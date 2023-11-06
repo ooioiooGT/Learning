@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import profile from './Profile.module.css';
 import { SignOut, SaveData } from './firbase';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default function Profile() {
   const [firstName, setFirstName] = useState('');
@@ -13,7 +14,7 @@ export default function Profile() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
-    const userLoggedIn = localStorage.getItem('user');
+    const userLoggedIn = Cookies.get('user');
     if (!userLoggedIn) {
       navigate('/'); // Redirect to the login page if not logged in
     }
